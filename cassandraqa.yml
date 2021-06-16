@@ -1,0 +1,11 @@
+---
+  - hosts: cassandra-qa 
+    become: yes 
+    become_user: root
+    tasks:  
+     - name: show the symlink for each cassandra qa eu & cn  
+       shell: ls -ahl /var/lib/cassandra/ | grep backup
+
+       register: results
+     - debug: msg="{{ results.stdout_lines}}"
+
