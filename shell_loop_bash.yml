@@ -1,0 +1,23 @@
+---
+    - hosts: server_name 
+      become: yes 
+      become_user: user
+      tasks:  
+      
+       - name: Check OpenSSL for all csr.pem generated
+         shell: |
+            for i in /tmp/my_csr/*.pem;do
+            echo $i;
+            openssl req -verify -noout -text -in $i;
+            done
+         args:
+          executable: /bin/bash
+         register: cert
+         ignore_errors: yes
+         register: results 
+  
+       - debug: msg="{{ results.stderr_lines}}"
+  
+  
+  
+  
