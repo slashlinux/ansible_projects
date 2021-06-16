@@ -1,0 +1,9 @@
+---
+- hosts: server_anme
+  become: yes
+  become_user: user
+  tasks:
+    - name: Listing files
+      shell: '/bin/bash -i -c "kb | grep -i disabled"'
+      register: results
+    - debug: msg="{{ results.stdout_lines | replace('93m','100')}}"
