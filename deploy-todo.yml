@@ -1,1 +1,9 @@
+---
+  - hosts: localhost 
+    connection: local
+    tasks:  
+     - name: docker-compose up -d  
+       shell: docker-compose -f /root/todo/app/docker-compose.yml up -d
+       register: "output"
+     - debug: var=output.stdout_lines
 
